@@ -3,7 +3,7 @@
 Set of some commands and guidelines for exploring new codebases. The principal points are:
 
 - Rely in external tools that are actively mantained or well supported
-- Titled by the action it achives
+- Titled by the action it achieves
 - As specific as possible (e.g. commands templates)
 - Maximise productivity
 - Tools supported by linux systems
