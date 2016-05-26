@@ -1,9 +1,9 @@
 # Explorers
 
-Set of commands and guidelines to explore new codebases. The principal points are the following ones:
+Set of some commands and guidelines for exploring new codebases. The principal points are:
 
 - Rely in external tools that are actively mantained or well supported
-- Scenario based
+- Titled by the action you want to achieve
 - As specific as possible (e.g. commands templates)
 - Maximise productivity
 - Tools supported by linux systems
