@@ -3,7 +3,7 @@
 Set of some commands and guidelines for exploring new codebases. The principal points are:
 
 - Rely in external tools that are actively mantained or well supported
-- Titled by the action you want to achieve
+- Titled by the action it achives
 - As specific as possible (e.g. commands templates)
 - Maximise productivity
 - Tools supported by linux systems
@@ -15,7 +15,7 @@ To install the used tools in Ubuntu: `sh install-ubuntu.sh`
 find . -type f -not -path "./.git/*" | wc -l
 ```
 
-- File structure ignoring some directories and only for .js files, not showing empty directories
+- Display file structure ignoring some directories and only for .js files, not showing empty directories
 ```shell
 tree -a -I ".git|node_modules" -P "*.js" --prune .
 ```
