@@ -1,6 +1,6 @@
 # Explorers
 
-Set of some commands and guidelines for exploring new codebases.
+Set of commands and guidelines for exploring codebases.
 
 ## Principles
 
