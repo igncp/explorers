@@ -13,6 +13,7 @@ Set of commands and guidelines for exploring codebases.
 ## Links
 
 - [General](general.md)
+- [Git](git.md)
 - [Markdown](md.md)
 - [JS](js.md)
 

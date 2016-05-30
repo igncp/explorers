@@ -34,21 +34,9 @@ baobab .
 cat package.json |  jq .dependencies && cat package.json |  jq .devDependencies
 ```
 
-- Get stats of a git repository (using git-extras)
-```shell
-git summary
-git effort
-git effort --above 100 foo/**/*
-```
-
 - Display the words in files, sorted by frequency, excluding the ones with less letters than three, and excluding words from a custom list
 ```shell
 find . -type f | xargs cat | fgrep -v -w -f ../custom/list.txt | tr -c '[:alpha:]' '[\n*]' | sed -r '/^.{,3}$/d' | sort | uniq -c | sort -nr | less
-```
-
-- Display the extensions of files, sorted by frequency
-```shell
-find foo-dir -type f | awk -F . '{if (NF>1) {print $NF}}' | sort | uniq -c | sort -nr | less
 ```
 
 - Display the words in filenames by frequency (excluding extensions)
@@ -69,4 +57,14 @@ find . -maxdepth 1 -type f | sed "s/\.\///" | sort -V | less -N
 - Remove lines from a file that are equal to lines from other file, maintaining the order of the remaining lines
 ```shell
 grep -Fvxf <(cat OTHER_FILE.txt) FILE_WITH_LINES_TO_REMOVE.txt | less
+```
+
+- Display only directoriesfrom the current directories sizes, sorted
+```shell
+(ExSizeFirstLevelDirs() { du -h --max-depth=1 $1 | sed s_$1__ | sort -hr; } && ExSizeFirstLevelDirs PATH/TO/DIR)
+```
+
+- Display all extensions sorted by frequency
+```shell
+find . -type f | sed 's/.*\.//' | sed 's/.*\///' | sort | uniq -c | sort -nr | less
 ```

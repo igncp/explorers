@@ -7,3 +7,8 @@ find . -type f | grep -rhoP " from (.)*?;$" | sort | uniq -c | sort -nr | less
 ```shell
 (function inspect(){ jq -M $1 package.json | sort; } && (inspect .dependencies && inspect .devDependencies) | sed -r "s/\: \"(.)+?$//g" | sed -r "s/\{|\}/ /" | sed -r "s/\"| //g" | uniq)
 ```
+
+- Print specs of tests (assuming single quotes)
+```shell
+find path/to/test/file -type f | xargs grep -hE "it\('.+' | describe\('.+'" | sed -r "s/it\('//; s/  describe\('/- /; s/'.+?$//"
+```
