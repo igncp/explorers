@@ -68,3 +68,8 @@ grep -Fvxf <(cat OTHER_FILE.txt) FILE_WITH_LINES_TO_REMOVE.txt | less
 ```shell
 find . -type f | sed 's/.*\.//' | sed 's/.*\///' | sort | uniq -c | sort -nr | less
 ```
+
+- Display TODO's that contain the format TODO(name), with the line number and the file:
+```shell
+find . -type f | xargs grep -nE "TODO\(.+\):" | less -N
+```
