@@ -31,5 +31,5 @@ cat FILE | sed -r "s/:(.)+?/: .../g" | vim -
 
 - Remove the filename of paths, leaving the extension (in this case md):
 ```shell
-cat FILE | | sed -r "s/[-0-9a-zA-Z\._]*\.md/_.md/g" | vim -
+cat FILE | sed -r "s/[-0-9a-zA-Z\._]*\.md/_.md/g" | vim -
 ```
