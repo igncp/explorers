@@ -1,6 +1,7 @@
-- Count files excluding some directories
+- Count and sort files for directories (excluding some like .git)
 ```shell
-find . -type f -not -path "./.git/*" | wc -l
+(CF() { for i; do find $i -type f -not -path "./.git/*" -not -path "./node_modules/*" | wc -l | xargs -I{} echo {} "$i" ; done; } && CF foo bar) | sort -nr
+(for i in $(find . -maxdepth 1 -type d | sed "/^.$/d" | sed "s|./||"); do find $i -type f -not -path "./.git/*" -not -path "./node_modules/*" | wc -l | xargs -I{} echo {} "$i" ; done) | sort -nr # every directory in current directory
 ```
 
 - Display file structure for two levels, ignoring some directories and only for .js files, not showing empty directories
@@ -17,6 +18,9 @@ find . -type f | xargs grep -si FoO -l
 ```shell
 find . -type f -name "*.ts" | xargs wc -l | sort | less # displaying all files
 ( find ./ -name '*.ts' -print0 | xargs -0 cat ) | wc -l # one number
+(CL() { for i; do ( find $i -type f -print0 | xargs -0 cat ) | wc -l | xargs -I{} echo {} "$i"; done; } && CL foo bar) | sort -nr # all files summed
+find . -name "*.sh" | xargs wc -l | sed "/ total/d" | sed "s|./||" | sed -r "s|[ ]+?([0-9]*?) (.*?)|\2 [\1]|" | sort -V # files followed of the numer of lines
+(for i in $(find . -maxdepth 1 -type d | sed "/^.$/d" | sed "s|./||"); do ( find $i -type f -print0 | xargs -0 cat ) | wc -l | xargs -I{} echo {} "$i"; done; ) | sort -nr # every directory of current directory
 ```
 
 - Display files content separatedly in less
@@ -59,7 +63,7 @@ find . -maxdepth 1 -type f | sed "s/\.\///" | sort -V | less -N
 grep -Fvxf <(cat OTHER_FILE.txt) FILE_WITH_LINES_TO_REMOVE.txt | less
 ```
 
-- Display only directoriesfrom the current directories sizes, sorted
+- Display sizes from directories in the current directory, sorted
 ```shell
 (ExSizeFirstLevelDirs() { du -h --max-depth=1 $1 | sed s_$1__ | sort -hr; } && ExSizeFirstLevelDirs PATH/TO/DIR)
 ```
@@ -72,4 +76,14 @@ find . -type f | sed 's/.*\.//' | sed 's/.*\///' | sort | uniq -c | sort -nr | l
 - Display TODO's that contain the format TODO(name), with the line number and the file:
 ```shell
 find . -type f | xargs grep -nE "TODO\(.+\):" | less -N
+```
+
+- Remove ANSI colors from output:
+```shell
+COMMAND1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"
+```
+
+- Display different lines between two files side by side:
+```shell
+diff -dy FILE1 FILE2 --suppress-common-lines | less -N
 ```

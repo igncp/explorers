@@ -16,6 +16,7 @@ Set of commands and guidelines for exploring codebases.
 - [Git](git.md)
 - [Markdown](md.md)
 - [JS](js.md)
+- [Learning by manual completion](manual-completion.md)
 
 To install the used tools in Ubuntu: `sh install-ubuntu.sh`. Remember, create alias or functions for the ones you plan to use frequently.
 
