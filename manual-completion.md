@@ -1,7 +1,7 @@
 - Replace all letters and hyphens in a file by an asterisk:
 ```shell
 cat FILE | sed "s/[a-zA-Z_\-]/*/g" | vim -
-``
+```
 
 - Replace all N of every M letters by an asterisk:
 ```shell
