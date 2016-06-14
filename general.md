@@ -70,7 +70,7 @@ grep -Fvxf <(cat OTHER_FILE.txt) FILE_WITH_LINES_TO_REMOVE.txt | less
 
 - Display all extensions sorted by frequency
 ```shell
-find . -type f | sed 's/.*\.//' | sed 's/.*\///' | sort | uniq -c | sort -nr | less
+find . -type f | sed 's/.*\.//' | sed 's/.*\///' | sort | uniq -c | sort -nr | less -N
 ```
 
 - Display TODO's that contain the format TODO(name), with the line number and the file:
@@ -83,7 +83,7 @@ find . -type f | xargs grep -nE "TODO\(.+\):" | less -N
 COMMAND1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"
 ```
 
-- Display different lines between two files side by side:
+- Display different lines between two files side by side (ignoring whitespaces):
 ```shell
-diff -dy FILE1 FILE2 --suppress-common-lines | less -N
+diff -dyb FILE1 FILE2 --suppress-common-lines | less -N
 ```

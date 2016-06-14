@@ -10,5 +10,5 @@ find . -type f | grep -rhoP " from (.)*?;$" | sort | uniq -c | sort -nr | less
 
 - Print specs of tests (assuming single quotes)
 ```shell
-find path/to/test/file -type f | xargs grep -hE "it\('.+' | describe\('.+'" | sed -r "s/it\('//; s/  describe\('/- /; s/'.+?$//"
+find . -type f | xargs grep -hE "it\('.+'|describe\('.+'" | sed -r "s/([a-zA-Z\.])+?it\('//; s/([a-zA-Z\.])+?describe\('/- /; s/'.+?$//"
 ```
