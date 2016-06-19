@@ -1,7 +1,7 @@
 - Count and sort files for directories (excluding some like .git)
 ```shell
 (CF() { for i; do find $i -type f -not -path "./.git/*" -not -path "./node_modules/*" | wc -l | xargs -I{} echo {} "$i" ; done; } && CF foo bar) | sort -nr
-(for i in $(find . -maxdepth 1 -type d | sed "/^.$/d" | sed "s|./||"); do find $i -type f -not -path "./.git/*" -not -path "./node_modules/*" | wc -l | xargs -I{} echo {} "$i" ; done) | sort -nr # every directory in current directory
+(for i in $(find . -maxdepth 1 -type d | sed "/^.$/d" | sed "s|./||"); do find $i -type f ! -path "./.git/*" ! -path "./node_modules/*" | wc -l | xargs -I{} echo {} "$i" ; done) | sort -nr # every directory in current directory
 ```
 
 - Display file structure for two levels, ignoring some directories and only for .js files, not showing empty directories
@@ -16,7 +16,7 @@ find . -type f | xargs grep -si FoO -l
 
 - Count the lines of code for a file extension
 ```shell
-find . -type f -name "*.ts" | xargs wc -l | sort | less # displaying all files
+find . -type f -name "*.ts" | xargs wc -l | sort -nr | less # displaying all files
 ( find ./ -name '*.ts' -print0 | xargs -0 cat ) | wc -l # one number
 (CL() { for i; do ( find $i -type f -print0 | xargs -0 cat ) | wc -l | xargs -I{} echo {} "$i"; done; } && CL foo bar) | sort -nr # all files summed
 find . -name "*.sh" | xargs wc -l | sed "/ total/d" | sed "s|./||" | sed -r "s|[ ]+?([0-9]*?) (.*?)|\2 [\1]|" | sort -V # files followed of the numer of lines
@@ -86,4 +86,9 @@ COMMAND1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"
 - Display different lines between two files side by side (ignoring whitespaces):
 ```shell
 diff -dyb FILE1 FILE2 --suppress-common-lines | less -N
+```
+
+- Display several files together
+```shell
+find . -name "*.js" ! -path "*node_modules*" | xargs tail -n +1 | sed "s|==>|\n\n\n\n\n==>|; s|<==|<==\n|" | vim -
 ```
